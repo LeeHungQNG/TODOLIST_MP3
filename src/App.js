@@ -17,6 +17,10 @@ function App() {
             {/* <Route path="home" element={<Home></Home>} /> */}
             <Route path={path.HOME} element={<Home></Home>} />
             <Route path={path.LOGIN} element={<Login></Login>} />
+
+
+             {/* path "/*" */}
+            <Route path={path.STAR} element={<Home></Home>} />
           </Route>
         </Routes>
       </div>
