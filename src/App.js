@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Home, Login, Public } from './containers/public';
 import { Route, Routes } from 'react-router-dom';
 import path from './utils/path';
+import * as actions from './store/actions';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(actions.getHome());
+  }, [dispatch]);
+
   return (
     <>
       <div className="">
@@ -18,8 +25,7 @@ function App() {
             <Route path={path.HOME} element={<Home></Home>} />
             <Route path={path.LOGIN} element={<Login></Login>} />
 
-
-             {/* path "/*" */}
+            {/* path "/*" */}
             <Route path={path.STAR} element={<Home></Home>} />
           </Route>
         </Routes>
