@@ -8,7 +8,7 @@ const activeStyle = 'py-2 px-[25px] font-bold text-[#0F7070] text-[13px] flex ga
 
 const SidebarLeft = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-[#DDE4E4]">
       <div className="w-full h-[70px] px-[25px] py-[15px] flex items-center justify-start">
         <img src={logo} alt="logo zingmp3" className="w-[120px] h-[40px]" />
       </div>
