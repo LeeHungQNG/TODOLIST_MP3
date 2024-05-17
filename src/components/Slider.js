@@ -54,6 +54,7 @@ const Slider = () => {
   }, []);
 
   const handleClickBanner = (item) => {
+    console.log('🚀 ~ handleClickBanner ~ item:', item);
     if (item?.type === 1) {
       dispatch(actions.setCurSongId(item.encodeId));
     }
