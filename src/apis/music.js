@@ -4,7 +4,7 @@ export const getSong = (sid) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axios({
-        url: '/song ',
+        url: '/song',
         method: 'GET',
         params: { id: sid },
       });
@@ -17,7 +17,7 @@ export const getDetailSong = (sid) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axios({
-        url: '/infosong ',
+        url: '/infosong',
         method: 'GET',
         params: { id: sid },
       });
