@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Home, Login, Personal, Public } from './containers/public';
+import { Album, Home, Login, Personal, Public } from './containers/public';
 import { Route, Routes } from 'react-router-dom';
 import path from './utils/path';
 import * as actions from './store/actions';
@@ -25,6 +25,7 @@ function App() {
             <Route path={path.HOME} element={<Home></Home>} />
             <Route path={path.LOGIN} element={<Login></Login>} />
             <Route path={path.MY_MUSIC} element={<Personal></Personal>} />
+            <Route path={path.ALBUM__TITLE__PID} element={<Album></Album>} />
 
             {/* path "/*" */}
             <Route path={path.STAR} element={<Home></Home>} />

@@ -6,17 +6,16 @@ import icons from '../utils/icons';
 const { FaHeart, FaRegHeart, HiOutlineDotsHorizontal, CiRepeat, MdSkipNext, MdSkipPrevious, TfiControlShuffle, FaPlay, FaPause } = icons;
 
 const Player = () => {
-  const audioEl = new Audio(
-    'https://a128-z3.zmdcdn.me/7252053b66d9ca459205d8c2ac5a1b1e?authen=exp=1716201597~acl=/7252053b66d9ca459205d8c2ac5a1b1e/*~hmac=37b7f6709755f0aa3dedf0eb2bd93d20'
-  );
+  const audioEl = new Audio();
+
   const { curSongId, isPlaying } = useSelector((state) => state.music);
   const [songInfo, setSongInfo] = useState(null);
   const [source, setSource] = useState(null);
 
   useEffect(() => {
     const fetchDetailSong = async () => {
-      // const response = await apis.getDetailSong(curSongId);
-      const [res1, res2] = await Promise.all([apis.getDetailSong(curSongId), apis.getSong(curSongId)]);
+      // const response = await apis.apiGetDetailSong(curSongId);
+      const [res1, res2] = await Promise.all([apis.apiGetDetailSong(curSongId), apis.apiGetSong(curSongId)]);
       console.log('🚀 ~ fetchDetailSong ~ res2:', res2);
       console.log('🚀 ~ fetchDetailSong ~ res1:', res1);
 
@@ -32,7 +31,7 @@ const Player = () => {
   console.log('🚀 ~ Player ~ songInfo:', songInfo);
 
   useEffect(() => {
-    audioEl.play();
+    // audioEl.play();
   }, [curSongId]);
 
   const handleTogglePlayMusic = () => {};

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom'; // dùng để hiển thị component con của public nested route
-import { Player, SidebarLeft, SidebarRight } from '../../components';
+import { Header, Player, SidebarLeft, SidebarRight } from '../../components';
 const Public = () => {
   return (
     <div className="w-full min-h-screen flex flex-col bg-main-300">
@@ -9,6 +9,9 @@ const Public = () => {
           <SidebarLeft />
         </div>
         <div className="flex-auto border border-red-500">
+          <div className="h-[70px] px-[59px] flex items-center mb-5">
+            <Header />
+          </div>
           <Outlet />
         </div>
         <div className="w-[330px] hidden 1600:flex flex-none border border-green-500 animate-slide-left">
