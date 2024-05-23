@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as apis from '../../apis';
 import moment from 'moment';
+import { Lists } from '../../components';
 
 const Album = () => {
   const [playlistData, setPlaylistData] = useState({});
@@ -32,7 +33,13 @@ const Album = () => {
           <span className="flex gap-1 items-center text-gray-500 text-xs">{`${Math.round(playlistData?.like / 1000)}K người yêu thích`}</span>
         </div>
       </div>
-      <div className="flex-auto border border-blue-500">List Song</div>
+      <div className="flex-auto border border-blue-500">
+        <span className="text-sm">
+          <span className="text-gray-400">Lời tựa </span>
+          <span>{playlistData?.sortDescription}</span>
+        </span>
+        <Lists songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} />
+      </div>
     </div>
   );
 };

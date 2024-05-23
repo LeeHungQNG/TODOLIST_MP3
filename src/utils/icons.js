@@ -14,6 +14,7 @@ import { MdSkipPrevious } from 'react-icons/md';
 import { TfiControlShuffle } from 'react-icons/tfi';
 import { FaPlay } from 'react-icons/fa';
 import { FaPause } from 'react-icons/fa6';
+import { BsMusicNoteBeamed } from 'react-icons/bs';
 const icons = {
   MdOutlineLibraryMusic,
   IoDiscOutline,
@@ -32,6 +33,7 @@ const icons = {
   TfiControlShuffle,
   FaPlay,
   FaPause,
+  BsMusicNoteBeamed,
 };
 
 export default icons;
