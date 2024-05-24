@@ -4,7 +4,7 @@ import * as apis from '../apis';
 import icons from '../utils/icons';
 import * as actions from '../store/actions';
 import moment from 'moment';
-
+import { toast } from 'react-toastify';
 const { FaHeart, FaRegHeart, HiOutlineDotsHorizontal, CiRepeat, MdSkipNext, MdSkipPrevious, TfiControlShuffle, FaPlay, FaPause } = icons;
 
 var intervalId;
@@ -15,6 +15,7 @@ const Player = () => {
   const [audio, setAudio] = useState(new Audio());
   const [curSeconds, setCurSeconds] = useState(0);
   const thumbRef = useRef();
+  const trackRef = useRef();
   useEffect(() => {
     const fetchDetailSong = async () => {
       // const response = await apis.apiGetDetailSong(curSongId);
@@ -28,27 +29,30 @@ const Player = () => {
       if (res2?.data?.err === 0) {
         audio.pause();
         setAudio(new Audio(res2?.data?.data['128']));
+      } else {
+        setAudio(new Audio());
+        dispatch(actions.play(false));
+        toast.warn(res2?.data.msg);
+        setCurSeconds(0);
+        thumbRef.current.style.cssText = `right: 100%`;
       }
     };
     fetchDetailSong();
   }, [curSongId]);
-  console.log('🚀 ~ Player ~ songInfo:', songInfo);
+  // console.log('🚀 ~ Player ~ songInfo:', songInfo);
 
   useEffect(() => {
+    intervalId && clearInterval(intervalId);
+    audio.pause();
+    audio.load();
     if (isPlaying) {
+      audio.play();
       intervalId = setInterval(() => {
         let percent = Math.round((audio.currentTime * 10000) / songInfo.duration) / 100; // làm tròn số thập phân nhân cho 10000
         thumbRef.current.style.cssText = `right: ${100 - percent}%`;
         setCurSeconds(Math.round(audio.currentTime));
       }, 200);
-    } else {
-      intervalId && clearInterval(intervalId);
     }
-  }, [isPlaying]);
-
-  useEffect(() => {
-    audio.load();
-    if (isPlaying) audio.play();
   }, [audio]);
 
   const handleTogglePlayMusic = () => {
@@ -59,6 +63,14 @@ const Player = () => {
       audio.play();
       dispatch(actions.play(true));
     }
+  };
+
+  const handleClickProgressBar = (e) => {
+    const trackRect = trackRef.current.getBoundingClientRect();
+    const percent = Math.round(((e.clientX - trackRect.left) * 10000) / trackRect.width) / 100;
+    thumbRef.current.style.cssText = `right: ${100 - percent}%`;
+    audio.currentTime = (percent * songInfo.duration) / 100;
+    setCurSeconds(Math.round(percent * songInfo.duration) / 100);
   };
 
   return (
@@ -98,8 +110,8 @@ const Player = () => {
         </div>
         <div className="w-full flex items-center justify-center gap-3 text-xs">
           <span>{moment.utc(curSeconds * 1000).format('mm:ss')}</span>
-          <div className="w-3/5 h-[3px] rounded-l-full rounded-r-full relative bg-[rgba(0,0,0,0.1)]">
-            <div ref={thumbRef} className="absolute top-0 left-0 h-[3px] rounded-l-full rounded-r-full bg-[#0e8080]"></div>
+          <div ref={trackRef} className="w-3/5 h-[3px] hover:h-[8px] cursor-pointer rounded-l-full rounded-r-full relative bg-[rgba(0,0,0,0.1)]" onClick={handleClickProgressBar}>
+            <div ref={thumbRef} className="absolute top-0 left-0 bottom-0 rounded-l-full rounded-r-full bg-[#0e8080]"></div>
           </div>
           <span>{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
         </div>
