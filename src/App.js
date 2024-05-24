@@ -26,6 +26,7 @@ function App() {
             <Route path={path.LOGIN} element={<Login></Login>} />
             <Route path={path.MY_MUSIC} element={<Personal></Personal>} />
             <Route path={path.ALBUM__TITLE__PID} element={<Album></Album>} />
+            <Route path={path.PLAYLIST__TITLE__PID} element={<Album></Album>} />
 
             {/* path "/*" */}
             <Route path={path.STAR} element={<Home></Home>} />
