@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as apis from '../apis';
 import icons from '../utils/icons';
-
+import * as actions from '../store/actions';
 const { FaHeart, FaRegHeart, HiOutlineDotsHorizontal, CiRepeat, MdSkipNext, MdSkipPrevious, TfiControlShuffle, FaPlay, FaPause } = icons;
 
 const Player = () => {
-  const audioEl = new Audio();
-
+  const audioEl = useRef(new Audio());
+  const dispatch = useDispatch();
   const { curSongId, isPlaying } = useSelector((state) => state.music);
   const [songInfo, setSongInfo] = useState(null);
   const [source, setSource] = useState(null);
+  console.log('🚀 ~ Player ~ source:', source);
 
   useEffect(() => {
     const fetchDetailSong = async () => {
       // const response = await apis.apiGetDetailSong(curSongId);
       const [res1, res2] = await Promise.all([apis.apiGetDetailSong(curSongId), apis.apiGetSong(curSongId)]);
-      console.log('🚀 ~ fetchDetailSong ~ res2:', res2);
       console.log('🚀 ~ fetchDetailSong ~ res1:', res1);
+      console.log('🚀 ~ fetchDetailSong ~ res2:', res2);
 
       if (res1?.data?.err === 0) {
         setSongInfo(res1?.data?.data);
       }
       if (res2?.data?.err === 0) {
-        setSource(res1?.data?.data['128']);
+        setSource(res2?.data?.data['128']);
       }
     };
     fetchDetailSong();
@@ -31,10 +32,21 @@ const Player = () => {
   console.log('🚀 ~ Player ~ songInfo:', songInfo);
 
   useEffect(() => {
-    // audioEl.play();
-  }, [curSongId]);
+    audioEl.current.pause();
+    audioEl.current.src = source;
+    audioEl.current.load();
+    if (isPlaying) audioEl.current.play();
+  }, [curSongId, source]);
 
-  const handleTogglePlayMusic = () => {};
+  const handleTogglePlayMusic = () => {
+    if (isPlaying) {
+      audioEl.current.pause();
+      dispatch(actions.play(false));
+    } else {
+      audioEl.current.play();
+      dispatch(actions.play(true));
+    }
+  };
 
   return (
     <div className="bg-main-400 px-5 h-full flex">

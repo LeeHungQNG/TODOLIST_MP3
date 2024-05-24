@@ -15,7 +15,7 @@ const musicReducer = (state = initState, action) => {
     case actionTypes.PLAY:
       return {
         ...state,
-        curSongId: action.flag,
+        isPlaying: action.flag,
       };
 
     default:
