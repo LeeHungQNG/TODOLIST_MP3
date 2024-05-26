@@ -2,11 +2,13 @@ import React, { memo } from 'react';
 import List from './List';
 import moment from 'moment';
 import icons from '../utils/icons';
+import { useSelector } from 'react-redux';
 
 const { LuDot } = icons;
 
-const Lists = ({ songs, totalDuration }) => {
+const Lists = ({ totalDuration }) => {
   // console.log({ songs, totalDuration });
+  const { songs } = useSelector((state) => state.music);
   return (
     <div className="w-full flex flex-col text-xs text-gray-600">
       <div className="flex items-center justify-between p-[10px] font-semibold">

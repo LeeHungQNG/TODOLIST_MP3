@@ -10,10 +10,13 @@ const { FaHeart, FaRegHeart, HiOutlineDotsHorizontal, CiRepeat, MdSkipNext, MdSk
 var intervalId;
 const Player = () => {
   const dispatch = useDispatch();
-  const { curSongId, isPlaying } = useSelector((state) => state.music);
+  const { curSongId, isPlaying, songs } = useSelector((state) => state.music);
+
   const [songInfo, setSongInfo] = useState(null);
   const [audio, setAudio] = useState(new Audio());
   const [curSeconds, setCurSeconds] = useState(0);
+  const [isShuffle, setIsShuffle] = useState(false);
+
   const thumbRef = useRef();
   const trackRef = useRef();
   useEffect(() => {
@@ -30,6 +33,7 @@ const Player = () => {
         audio.pause();
         setAudio(new Audio(res2?.data?.data['128']));
       } else {
+        audio.pause();
         setAudio(new Audio());
         dispatch(actions.play(false));
         toast.warn(res2?.data.msg);
@@ -73,6 +77,30 @@ const Player = () => {
     setCurSeconds(Math.round(percent * songInfo.duration) / 100);
   };
 
+  const handleNextSong = () => {
+    if (songs) {
+      let currentSongIndex;
+      songs?.forEach((item, index) => {
+        if (item?.encodeId === curSongId) currentSongIndex = index;
+      });
+      dispatch(actions.setCurSongId(songs[currentSongIndex + 1].encodeId));
+      dispatch(actions.play(true));
+    }
+  };
+
+  const handlePrevSong = () => {
+    if (songs) {
+      let currentSongIndex;
+      songs?.forEach((item, index) => {
+        if (item?.encodeId === curSongId) currentSongIndex = index;
+      });
+      dispatch(actions.setCurSongId(songs[currentSongIndex - 1].encodeId));
+      dispatch(actions.play(true));
+    }
+  };
+
+  const handleShuffle = () => {};
+
   return (
     <div className="bg-main-400 px-5 h-full flex">
       <div className="w-[30%] flex-auto flex gap-4 items-center">
@@ -92,16 +120,16 @@ const Player = () => {
       </div>
       <div className="w-[40%] flex-auto border flex gap-2 py-2 flex-col items-center justify-center border-red-500">
         <div className="flex gap-8 items-center justify-center">
-          <span title="Bật phát ngẫu nhiên" className="cursor-pointer">
+          <span title="Bật phát ngẫu nhiên" className={`${isShuffle && 'text-purple-600'} cursor-pointer`} onClick={() => setIsShuffle((prev) => !prev)}>
             <TfiControlShuffle size={24} />
           </span>
-          <span className="cursor-pointer">
+          <span className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} onClick={handlePrevSong}>
             <MdSkipPrevious size={28} />
           </span>
           <span onClick={handleTogglePlayMusic} className="p-2 flex items-center border border-gray-700 rounded-full cursor-pointer hover:text-main-500">
             {isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
           </span>
-          <span className="cursor-pointer">
+          <span className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} onClick={handleNextSong}>
             <MdSkipNext size={28} />
           </span>
           <span title="Bật phát lại tất cả" className="cursor-pointer">

@@ -5,6 +5,7 @@ import * as actions from '../store/actions';
 import { useNavigate } from 'react-router-dom';
 const Slider = () => {
   const { banner } = useSelector((state) => state.app);
+  console.log('🚀 ~ Slider ~ banner:', banner);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -62,10 +63,13 @@ const Slider = () => {
     if (item?.type === 1) {
       dispatch(actions.setCurSongId(item.encodeId));
       dispatch(actions.play(true));
+      dispatch(actions.setPlaylist(null));
     } else if (item?.type === 4) {
-      console.log(item);
+      // dispatch(actions.playAlbum(true));
       const albumPath = item?.link?.split('.')[0];
       navigate(albumPath);
+    } else {
+      dispatch(actions.setPlaylist(null));
     }
   };
   return (
