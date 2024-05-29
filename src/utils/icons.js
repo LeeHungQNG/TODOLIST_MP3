@@ -16,6 +16,7 @@ import { FaPlay } from 'react-icons/fa';
 import { FaPause } from 'react-icons/fa6';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 import { LuDot } from 'react-icons/lu';
+import { PiRepeatOnce } from 'react-icons/pi';
 const icons = {
   MdOutlineLibraryMusic,
   IoDiscOutline,
@@ -36,6 +37,7 @@ const icons = {
   FaPause,
   BsMusicNoteBeamed,
   LuDot,
+  PiRepeatOnce,
 };
 
 export default icons;

@@ -12,9 +12,9 @@ const Lists = ({ totalDuration }) => {
   return (
     <div className="w-full flex flex-col text-xs text-gray-600">
       <div className="flex items-center justify-between p-[10px] font-semibold">
-        <span>Bai hat</span>
+        <span>Bài hát</span>
         <span>Album</span>
-        <span>Thoi gian</span>
+        <span>Thời gian</span>
       </div>
       <div>
         {songs?.map((item) => (

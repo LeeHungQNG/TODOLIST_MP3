@@ -5,7 +5,7 @@ import icons from '../utils/icons';
 import * as actions from '../store/actions';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-const { FaHeart, FaRegHeart, HiOutlineDotsHorizontal, CiRepeat, MdSkipNext, MdSkipPrevious, TfiControlShuffle, FaPlay, FaPause } = icons;
+const { FaHeart, FaRegHeart, HiOutlineDotsHorizontal, CiRepeat, MdSkipNext, MdSkipPrevious, TfiControlShuffle, FaPlay, FaPause, PiRepeatOnce } = icons;
 
 var intervalId;
 const Player = () => {
@@ -16,7 +16,7 @@ const Player = () => {
   const [audio, setAudio] = useState(new Audio());
   const [curSeconds, setCurSeconds] = useState(0);
   const [isShuffle, setIsShuffle] = useState(false);
-  const [isRepeat, setIsRepeat] = useState(false);
+  const [repeatMode, setRepeatMode] = useState(0);
 
   const thumbRef = useRef();
   const trackRef = useRef();
@@ -65,8 +65,8 @@ const Player = () => {
     const handleEnded = () => {
       if (isShuffle) {
         handleShuffle();
-      } else if (isRepeat) {
-        handleNextSong();
+      } else if (repeatMode) {
+        repeatMode === 1 ? handleRepeatOne() : handleNextSong();
       } else {
         audio.pause();
         dispatch(actions.play(false));
@@ -77,7 +77,7 @@ const Player = () => {
     return () => {
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [audio, isShuffle, isRepeat]);
+  }, [audio, isShuffle, repeatMode]);
 
   const handleTogglePlayMusic = () => {
     if (isPlaying) {
@@ -119,6 +119,10 @@ const Player = () => {
     }
   };
 
+  const handleRepeatOne = () => {
+    audio.play();
+  };
+
   const handleShuffle = () => {
     const randomIndex = Math.round(Math.random() * songs?.length) - 1; // vd length = 5 -> index from 0 -> 4 -> - 1
     dispatch(actions.setCurSongId(songs[randomIndex].encodeId));
@@ -156,8 +160,8 @@ const Player = () => {
           <span className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} onClick={handleNextSong}>
             <MdSkipNext size={28} />
           </span>
-          <span title="Bật phát lại tất cả" className={`${isRepeat && 'text-purple-600'} cursor-pointer`} onClick={() => setIsRepeat((prev) => !prev)}>
-            <CiRepeat size={24} />
+          <span title="Bật phát lại tất cả" className={`${repeatMode && 'text-purple-600'} cursor-pointer`} onClick={() => setRepeatMode((prev) => (prev === 2 ? 0 : prev + 1))}>
+            {repeatMode === 1 ? <PiRepeatOnce size={24} /> : <CiRepeat size={24} />}
           </span>
         </div>
         <div className="w-full flex items-center justify-center gap-3 text-xs">
