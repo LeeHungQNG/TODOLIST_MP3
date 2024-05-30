@@ -1,22 +1,18 @@
-import { MdOutlineLibraryMusic } from 'react-icons/md';
 import { IoDiscOutline } from 'react-icons/io5';
-import { TbChartArcs } from 'react-icons/tb';
-import { MdOutlineFeed } from 'react-icons/md';
-import { TbDeviceHeartMonitor } from 'react-icons/tb';
+import { TbDeviceHeartMonitor, TbChartArcs } from 'react-icons/tb';
 import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 import { GoSearch } from 'react-icons/go';
-import { FaHeart } from 'react-icons/fa';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { CiRepeat } from 'react-icons/ci';
-import { MdSkipNext } from 'react-icons/md';
-import { MdSkipPrevious } from 'react-icons/md';
+import { MdSkipNext, MdSkipPrevious, MdOutlineFeed, MdOutlineLibraryMusic } from 'react-icons/md';
 import { TfiControlShuffle } from 'react-icons/tfi';
 import { FaPlay } from 'react-icons/fa';
 import { FaPause } from 'react-icons/fa6';
-import { BsMusicNoteBeamed } from 'react-icons/bs';
+import { BsMusicNoteBeamed, BsMusicNoteList } from 'react-icons/bs';
 import { LuDot } from 'react-icons/lu';
 import { PiRepeatOnce } from 'react-icons/pi';
+import { HiOutlineVolumeUp, HiOutlineVolumeOff } from 'react-icons/hi';
 const icons = {
   MdOutlineLibraryMusic,
   IoDiscOutline,
@@ -38,6 +34,9 @@ const icons = {
   BsMusicNoteBeamed,
   LuDot,
   PiRepeatOnce,
+  BsMusicNoteList,
+  HiOutlineVolumeUp,
+  HiOutlineVolumeOff,
 };
 
 export default icons;

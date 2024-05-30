@@ -5,10 +5,25 @@ import icons from '../utils/icons';
 import * as actions from '../store/actions';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-const { FaHeart, FaRegHeart, HiOutlineDotsHorizontal, CiRepeat, MdSkipNext, MdSkipPrevious, TfiControlShuffle, FaPlay, FaPause, PiRepeatOnce } = icons;
+import LoadingSong from './LoadingSong';
+const {
+  FaHeart,
+  FaRegHeart,
+  HiOutlineDotsHorizontal,
+  CiRepeat,
+  MdSkipNext,
+  MdSkipPrevious,
+  TfiControlShuffle,
+  FaPlay,
+  FaPause,
+  PiRepeatOnce,
+  BsMusicNoteList,
+  HiOutlineVolumeUp,
+  HiOutlineVolumeOff,
+} = icons;
 
 var intervalId;
-const Player = () => {
+const Player = ({ setIsShowRightSidebar }) => {
   const dispatch = useDispatch();
   const { curSongId, isPlaying, songs } = useSelector((state) => state.music);
 
@@ -17,17 +32,18 @@ const Player = () => {
   const [curSeconds, setCurSeconds] = useState(0);
   const [isShuffle, setIsShuffle] = useState(false);
   const [repeatMode, setRepeatMode] = useState(0);
+  const [isLoadedSource, setIsLoadedSource] = useState(true);
+  const [volume, setVolume] = useState(100);
 
   const thumbRef = useRef();
   const trackRef = useRef();
 
   useEffect(() => {
     const fetchDetailSong = async () => {
+      setIsLoadedSource(false);
       // const response = await apis.apiGetDetailSong(curSongId);
       const [res1, res2] = await Promise.all([apis.apiGetDetailSong(curSongId), apis.apiGetSong(curSongId)]);
-      console.log('🚀 ~ fetchDetailSong ~ res1:', res1);
-      console.log('🚀 ~ fetchDetailSong ~ res2:', res2);
-
+      setIsLoadedSource(true);
       if (res1?.data?.err === 0) {
         setSongInfo(res1?.data?.data);
       }
@@ -78,6 +94,10 @@ const Player = () => {
       audio.removeEventListener('ended', handleEnded);
     };
   }, [audio, isShuffle, repeatMode]);
+
+  useEffect(() => {
+    audio.volume = volume / 100; // audio volume run 0 -> 1
+  }, [volume]);
 
   const handleTogglePlayMusic = () => {
     if (isPlaying) {
@@ -146,7 +166,7 @@ const Player = () => {
           </span>
         </div>
       </div>
-      <div className="w-[40%] flex-auto border flex gap-2 py-2 flex-col items-center justify-center border-red-500">
+      <div className="w-[40%] flex-auto flex gap-2 py-2 flex-col items-center justify-center">
         <div className="flex gap-8 items-center justify-center">
           <span title="Bật phát ngẫu nhiên" className={`${isShuffle && 'text-purple-600'} cursor-pointer`} onClick={() => setIsShuffle((prev) => !prev)}>
             <TfiControlShuffle size={24} />
@@ -155,7 +175,7 @@ const Player = () => {
             <MdSkipPrevious size={28} />
           </span>
           <span onClick={handleTogglePlayMusic} className="p-2 flex items-center border border-gray-700 rounded-full cursor-pointer hover:text-main-500">
-            {isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
+            {!isLoadedSource ? <LoadingSong /> : isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
           </span>
           <span className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} onClick={handleNextSong}>
             <MdSkipNext size={28} />
@@ -172,7 +192,17 @@ const Player = () => {
           <span>{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
         </div>
       </div>
-      <div className="w-[30%] flex-auto border border-red-500">Volume</div>
+      <div className="w-[30%] flex items-center justify-end gap-4 flex-auto">
+        <div className="flex gap-2 items-center">
+          <span className="cursor-pointer" onClick={() => setVolume((prev) => (+prev === 0 ? 70 : 0))}>
+            {+volume >= 50 ? <HiOutlineVolumeUp /> : +volume === 0 ? <HiOutlineVolumeOff /> : <HiOutlineVolumeUp />}
+          </span>
+          <input type="range" step={1} min={0} max={100} value={volume} onChange={(e) => setVolume(e.target.value)} />
+        </div>
+        <span onClick={() => setIsShowRightSidebar((prev) => !prev)} className="p-1 rounded-sm bg-main-500 opacity-90 hover:opacity-100 cursor-pointer">
+          <BsMusicNoteList size={20} />
+        </span>
+      </div>
     </div>
   );
 };
