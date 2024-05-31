@@ -20,3 +20,8 @@ export const setPlaylist = (songs) => ({
   type: actionTypes.PLAYLIST,
   songs,
 });
+
+export const loading = (flag) => ({
+  type: actionTypes.LOADING,
+  flag,
+});
