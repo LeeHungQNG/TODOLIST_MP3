@@ -55,7 +55,7 @@ const Album = () => {
           <span className="flex gap-1 items-center text-gray-500 text-xs">{`${Math.round(playlistData?.like / 1000)}K người yêu thích`}</span>
         </div>
       </div>
-      <Scrollbars style={{ width: '100%', height: '80%' }}>
+      <Scrollbars autoHide style={{ width: '100%', height: '80%' }}>
         <div className="flex-auto mb-40">
           <span className="text-sm">
             <span className="text-gray-400">Lời tựa </span>

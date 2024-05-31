@@ -8,6 +8,7 @@ const initState = {
   remix: {},
   albumHot: {},
   isLoading: false,
+  newRelease: {},
 };
 
 const appReducer = (state = initState, action) => {
@@ -21,6 +22,7 @@ const appReducer = (state = initState, action) => {
         top100: action.homeData?.find((item) => item.sectionId === 'h100') || {},
         remix: action.homeData?.find((item) => item.sectionId === 'hEditorTheme3') || {},
         albumHot: action.homeData?.find((item) => item.sectionId === 'hAlbum') || {},
+        newRelease: action.homeData?.find((item) => item.sectionType === 'new-release') || {},
       };
     case actionTypes.LOADING:
       return {

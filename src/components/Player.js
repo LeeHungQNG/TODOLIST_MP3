@@ -43,6 +43,7 @@ const Player = ({ setIsShowRightSidebar }) => {
       setIsLoadedSource(false);
       // const response = await apis.apiGetDetailSong(curSongId);
       const [res1, res2] = await Promise.all([apis.apiGetDetailSong(curSongId), apis.apiGetSong(curSongId)]);
+
       setIsLoadedSource(true);
       if (res1?.data?.err === 0) {
         setSongInfo(res1?.data?.data);
