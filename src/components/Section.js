@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import SectionItem from './SectionItem';
 
 const Section = ({ data }) => {
   // console.log('🚀 ~ Section ~ data:', data);
@@ -17,23 +18,15 @@ const Section = ({ data }) => {
           data.items
             .filter((item, index) => index <= 4)
             .map((item) => (
-              <div
-                onClick={() => {
-                  navigate(item?.link?.split('.')[0]);
-                }}
-                key={item.encodeId}
-                className="flex flex-col gap-3 flex-auto w-1/5 text-sm cursor-pointer"
-              >
-                <img src={item.thumbnailM} alt="thumbnailM" className="w-full h-auto rounded-lg" />
-                <span className="flex flex-col">
-                  <span className="font-semibold">{item.title}</span>
-                  {data?.sectionId === 'h100' || data?.sectionId === 'hAlbum' ? (
-                    <span>{item?.artistsNames}</span>
-                  ) : (
-                    <span>{item.sortDescription?.length >= 40 ? `${item.sortDescription?.slice(0, 40)}...` : item.sortDescription}</span>
-                  )}
-                </span>
-              </div>
+              <SectionItem
+                key={item.endcodeId}
+                data={data}
+                thumbnailM={item.thumbnailM}
+                title={item.title}
+                artistsNames={item.artistsNames}
+                sortDescription={item.sortDescription}
+                link={item.link}
+              />
             ))}
       </div>
     </div>

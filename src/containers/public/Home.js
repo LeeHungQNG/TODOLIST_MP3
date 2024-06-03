@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { NewRelease, Section, Slider } from '../../components';
 import * as apis from '../../apis';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 const Home = () => {
-  const { friday, chill, top100, remix, albumHot } = useSelector((state) => state.app);
+  const { friday, chill, top100, remix, albumHot, weekChart } = useSelector((state) => state.app);
   return (
     <div className="overflow-y-auto w-full">
       <Slider />
@@ -13,6 +14,13 @@ const Home = () => {
       <Section data={remix} />
       <Section data={top100} />
       <Section data={albumHot} />
+      <div className="flex mt-12 px-[43px] items-center w-full">
+        {weekChart?.map((item) => (
+          <Link to={item?.link.split('.')[0]} key={item.link} className="flex-1 px-4">
+            <img src={item.cover} alt="cover" className="w-full object-cover rounded-md" />
+          </Link>
+        ))}
+      </div>
       <div className="w-full h-[500px]"></div>
     </div>
   );
