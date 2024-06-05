@@ -36,7 +36,9 @@ const NewRelease = () => {
         {songs
           ?.filter((item, index) => index < 12)
           ?.map((item) => (
-            <SongItem key={item?.encodeId} thumbnail={item?.thumbnail} artistsNames={item?.artistsNames} title={item?.title} releaseDate={item?.releaseDate} sid={item?.encodeId} />
+            <div key={item?.encodeId} className="w-[45%] min-[1024px]:w-[30%]">
+              <SongItem thumbnail={item?.thumbnail} artistsNames={item?.artistsNames} title={item?.title} releaseDate={item?.releaseDate} sid={item?.encodeId} />
+            </div>
           ))}
       </div>
     </div>
