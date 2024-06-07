@@ -7,6 +7,7 @@ const path = {
   ALBUM__TITLE__PID: 'album/:title/:pid', // __ mean it is params
   PLAYLIST__TITLE__PID: 'playlist/:title/:pid', // __ mean it is params
   WEEKRANK__TITLE__PID: 'zing-chart-tuan/:title/:pid', // __ mean it is params
+  ZING_CHART: 'zing-chart',
 };
 
 export default path;

@@ -16,8 +16,6 @@ const Home = () => {
       <Section data={chill} />
       <Section data={remix} />
       <ChartSection />
-      <Section data={top100} />
-      <Section data={albumHot} />
       <div className="flex mt-12 px-[43px] items-center w-full">
         {weekChart?.map((item) => (
           <Link to={item?.link.split('.')[0]} key={item.link} className="flex-1 px-4">
@@ -25,6 +23,8 @@ const Home = () => {
           </Link>
         ))}
       </div>
+      <Section data={top100} />
+      <Section data={albumHot} />
       <div className="w-full h-[500px]"></div>
     </div>
   );
