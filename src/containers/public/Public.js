@@ -30,7 +30,7 @@ const Public = () => {
           </div>
         </div>
         {isShowRightSidebar && (
-          <div className="w-[330px] hidden 1600:flex flex-none border border-green-500 animate-slide-left">
+          <div className="w-[330px] hidden 1600:flex h-screen flex-none border border-green-500 animate-slide-left">
             <SidebarRight />
           </div>
         )}

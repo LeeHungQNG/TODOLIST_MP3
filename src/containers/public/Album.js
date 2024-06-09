@@ -23,6 +23,7 @@ const Album = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(actions.setCurAlbumId(pid));
     const fetchDetailPlaylist = async () => {
       dispatch(actions.loading(true));
       const response = await apis.apiGetDetailPlaylist(pid);

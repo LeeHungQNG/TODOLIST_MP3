@@ -13,6 +13,7 @@ import { BsMusicNoteBeamed, BsMusicNoteList } from 'react-icons/bs';
 import { LuDot } from 'react-icons/lu';
 import { PiRepeatOnce } from 'react-icons/pi';
 import { HiOutlineVolumeUp, HiOutlineVolumeOff } from 'react-icons/hi';
+import { TbTrashX } from 'react-icons/tb';
 const icons = {
   MdOutlineLibraryMusic,
   IoDiscOutline,
@@ -37,6 +38,7 @@ const icons = {
   BsMusicNoteList,
   HiOutlineVolumeUp,
   HiOutlineVolumeOff,
+  TbTrashX,
 };
 
 export default icons;

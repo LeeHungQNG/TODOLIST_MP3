@@ -25,3 +25,13 @@ export const loading = (flag) => ({
   type: actionTypes.LOADING,
   flag,
 });
+
+export const setCurSongData = (data) => ({
+  type: actionTypes.SET_CUR_SONG_DATA,
+  data,
+});
+
+export const setCurAlbumId = (pid) => ({
+  type: actionTypes.SET_CUR_ALBUM_ID,
+  pid,
+});

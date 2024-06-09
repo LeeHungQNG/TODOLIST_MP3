@@ -96,8 +96,8 @@ const ChartSection = () => {
       }
       setData({ labels, datasets });
     }
-    console.log('🚀 ~ useEffect ~ datasets:', datasets);
-    console.log('🚀 ~ useEffect ~ labels:', labels);
+    // console.log('🚀 ~ useEffect ~ datasets:', datasets);
+    // console.log('🚀 ~ useEffect ~ labels:', labels);
   }, [chart]);
 
   return (
@@ -117,6 +117,7 @@ const ChartSection = () => {
               ?.filter((i, index) => index < 3)
               ?.map((item, index) => (
                 <SongItem
+                  key={item.encodeId}
                   thumbnail={item?.thumbnail}
                   title={item?.title}
                   artistsNames={item?.artistsNames}

@@ -5,7 +5,7 @@ import SectionItem from './SectionItem';
 
 const Section = ({ data }) => {
   // console.log('🚀 ~ Section ~ data:', data);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div className="mt-12 px-[59px] flex flex-col gap-5">
       <div className="flex items-center justify-between">
@@ -16,10 +16,10 @@ const Section = ({ data }) => {
         {data &&
           data?.items?.length > 0 &&
           data.items
-            .filter((item, index) => index <= 4)
-            .map((item) => (
+            .filter((i, index) => index <= 4)
+            .map((item, idx) => (
               <SectionItem
-                key={item.endcodeId}
+                key={idx}
                 data={data}
                 thumbnailM={item.thumbnailM}
                 title={item.title}
