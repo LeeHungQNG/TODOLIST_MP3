@@ -35,3 +35,8 @@ export const setCurAlbumId = (pid) => ({
   type: actionTypes.SET_CUR_ALBUM_ID,
   pid,
 });
+
+export const setRecentSong = (data) => ({
+  type: actionTypes.SET_RECENT,
+  data,
+});

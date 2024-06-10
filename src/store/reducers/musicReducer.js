@@ -7,6 +7,7 @@ const initState = {
   atAlbum: false,
   songs: null,
   curAlbumId: null,
+  recentSongs: [],
 };
 
 const musicReducer = (state = initState, action) => {
@@ -40,6 +41,23 @@ const musicReducer = (state = initState, action) => {
       return {
         ...state,
         curAlbumId: action.pid || null,
+      };
+    case actionTypes.SET_RECENT:
+      let songs = state.recentSongs;
+      if (action.data) {
+        if (state.recentSongs?.some((i) => i.sid === action.data.sid)) {
+          // Xử lý bài hát khi bị trùng trong chức năng nghe gần đây
+          songs = songs.filter((i) => i.sid !== action.data.sid);
+        }
+        if (songs.length > 19) {
+          // chiểu dài mảng lớn hơn 2 thì xóa phần tử cuối
+          songs = songs.filter((item, index, self) => index !== self.length - 1); // self là chính mảng songs => mảng có 10 phần tử thì index = 9; self.length - 1 = 9 -> lấy từ 0 -> 8
+        }
+        songs = [action.data, ...songs]; // thêm pt đầu mảng sau khi xóa pt cuối có length > 20
+      }
+      return {
+        ...state,
+        recentSongs: songs,
       };
 
     default:

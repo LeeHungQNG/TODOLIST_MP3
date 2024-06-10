@@ -10,6 +10,7 @@ const SongItem = ({ thumbnail, artistsNames, title, releaseDate, sid, order, per
       onClick={() => {
         dispatch(actions.setCurSongId(sid));
         dispatch(actions.play(true));
+        dispatch(actions.setRecentSong({ thumbnail, artistsNames, title, sid }));
       }}
       className={`w-full flex justify-between items-center gap-[10px] flex-auto p-[10px]  rounded-md cursor-pointer ${style || 'text-black hover:bg-main-200'}`}
     >

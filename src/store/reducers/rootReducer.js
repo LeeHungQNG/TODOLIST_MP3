@@ -13,7 +13,7 @@ const commonConfig = {
 const musicConfig = {
   ...commonConfig,
   key: 'music',
-  whitelist: ['curSongId', 'curSongData', 'curAlbumId'], // cấu hình chỉ lưu state curSongId trong musicReducer xuống localstorage
+  whitelist: ['curSongId', 'curSongData', 'curAlbumId', 'recentSongs'], // cấu hình chỉ lưu state curSongId trong musicReducer xuống localstorage
 };
 
 const rootReducer = combineReducers({
