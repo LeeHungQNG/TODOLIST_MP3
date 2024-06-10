@@ -8,6 +8,9 @@ const path = {
   PLAYLIST__TITLE__PID: 'playlist/:title/:pid', // __ mean it is params
   WEEKRANK__TITLE__PID: 'zing-chart-tuan/:title/:pid', // __ mean it is params
   ZING_CHART: 'zing-chart',
+  SEARCH: 'tim-kiem',
+  ALL: 'tat-ca',
+  SONG: 'bai-hat',
 };
 
 export default path;
