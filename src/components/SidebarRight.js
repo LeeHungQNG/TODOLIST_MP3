@@ -10,12 +10,12 @@ const SidebarRight = () => {
   const [isRecent, setIsRecent] = useState(false);
   const [playlist, setPlaylist] = useState(null);
   const { curSongData, curAlbumId, isPlaying, recentSongs, curSongId } = useSelector((state) => state.music);
-  console.log('🚀 ~ SidebarRight ~ recentSongs:', recentSongs);
+  // console.log('🚀 ~ SidebarRight ~ recentSongs:', recentSongs);
   // console.log('🚀 ~ SidebarRight ~ curSongData:', curSongData);
 
   const fetchDetailPlaylist = async () => {
     const res = await apiGetDetailPlaylist(curAlbumId);
-    console.log('🚀 ~ fetchDetailPlaylist ~ res:', res);
+    // console.log('🚀 ~ fetchDetailPlaylist ~ res:', res);
     if (res.data?.err === 0) setPlaylist(res?.data?.data?.song?.items);
   };
 
