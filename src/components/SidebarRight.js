@@ -58,7 +58,7 @@ const SidebarRight = () => {
             {recentSongs && (
               <div className="flex flex-col">
                 {recentSongs?.map((item) => (
-                  <SongItem key={item?.sid} thumbnail={item?.thumbnail} artistsNames={item?.artistsNames} title={item?.title} sid={item?.sid} sm />
+                  <SongItem key={item?.sid} thumbnail={item?.thumbnail} artistsNames={item?.artistsNames} title={item?.title} sid={item?.sid} size="w-[40px] h-[40px]" />
                 ))}
               </div>
             )}
@@ -72,7 +72,7 @@ const SidebarRight = () => {
               artistsNames={curSongData?.artistsNames}
               title={curSongData?.title}
               sid={curSongData?.encodeId}
-              sm
+              size="w-[40px] h-[40px]"
               style="bg-main-500 text-white"
             />
             <div className="flex flex-col text-black pt-[15px] px-2 pb-[5px]">
@@ -87,7 +87,7 @@ const SidebarRight = () => {
             {playlist && (
               <div className="flex flex-col">
                 {playlist?.map((item) => (
-                  <SongItem key={item?.encodeId} thumbnail={item?.thumbnail} artistsNames={item?.artistsNames} title={item?.title} sid={item?.encodeId} sm />
+                  <SongItem key={item?.encodeId} thumbnail={item?.thumbnail} artistsNames={item?.artistsNames} title={item?.title} sid={item?.encodeId} size="w-[40px] h-[40px]" />
                 ))}
               </div>
             )}

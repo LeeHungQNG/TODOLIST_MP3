@@ -9,11 +9,12 @@ import { MdSkipNext, MdSkipPrevious, MdOutlineFeed, MdOutlineLibraryMusic } from
 import { TfiControlShuffle } from 'react-icons/tfi';
 import { FaPlay } from 'react-icons/fa';
 import { FaPause } from 'react-icons/fa6';
-import { BsMusicNoteBeamed, BsMusicNoteList } from 'react-icons/bs';
+import { BsMusicNoteBeamed, BsMusicNoteList, BsPersonAdd } from 'react-icons/bs';
 import { LuDot } from 'react-icons/lu';
 import { PiRepeatOnce } from 'react-icons/pi';
 import { HiOutlineVolumeUp, HiOutlineVolumeOff } from 'react-icons/hi';
 import { TbTrashX } from 'react-icons/tb';
+
 const icons = {
   MdOutlineLibraryMusic,
   IoDiscOutline,
@@ -39,6 +40,7 @@ const icons = {
   HiOutlineVolumeUp,
   HiOutlineVolumeOff,
   TbTrashX,
+  BsPersonAdd,
 };
 
 export default icons;

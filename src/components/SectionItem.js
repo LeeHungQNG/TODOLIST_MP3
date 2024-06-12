@@ -50,8 +50,8 @@ const SectionItem = ({ link, thumbnailM, title, data, artistsNames, sortDescript
         <img ref={imageRef} src={thumbnailM} alt="thumbnailM" className="w-full h-auto rounded-lg" />
       </div>
       <span className="flex flex-col">
-        <span className="font-semibold">{title}</span>
-        {data?.sectionId === 'h100' || data?.sectionId === 'hAlbum' ? (
+        <span className="font-semibold">{title?.length > 30 ? title.slice(0, 30) + '...' : title}</span>
+        {data?.sectionId === 'h100' || data?.sectionId === 'hAlbum' || artistsNames ? (
           <span>{artistsNames}</span>
         ) : (
           <span>{sortDescription?.length >= 40 ? `${sortDescription?.slice(0, 40)}...` : sortDescription}</span>
