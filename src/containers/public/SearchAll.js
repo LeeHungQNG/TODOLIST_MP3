@@ -63,7 +63,7 @@ const SearchAll = () => {
           {searchData?.artists
             ?.filter((i, index) => index <= 4)
             ?.map((item, index) => (
-              <Artist key={item.id} title={item?.name} image={item?.thumbnailM} follower={item?.totalFollow} />
+              <Artist key={item.id} title={item?.name} image={item?.thumbnailM} follower={item?.totalFollow} link={item?.link} />
             ))}
         </div>
       </div>

@@ -14,7 +14,7 @@ import { LuDot } from 'react-icons/lu';
 import { PiRepeatOnce } from 'react-icons/pi';
 import { HiOutlineVolumeUp, HiOutlineVolumeOff } from 'react-icons/hi';
 import { TbTrashX } from 'react-icons/tb';
-
+import { IoCloseSharp } from 'react-icons/io5';
 const icons = {
   MdOutlineLibraryMusic,
   IoDiscOutline,
@@ -41,6 +41,7 @@ const icons = {
   HiOutlineVolumeOff,
   TbTrashX,
   BsPersonAdd,
+  IoCloseSharp,
 };
 
 export default icons;
