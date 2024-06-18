@@ -25,7 +25,7 @@ const SectionItem = ({ link, thumbnailM, title, data, artistsNames, sortDescript
       }}
       onMouseEnter={handleHover}
       onMouseLeave={handleLeave}
-      className="flex flex-col gap-3 flex-auto w-1/5 text-sm cursor-pointer"
+      className="flex flex-col gap-3 w-[15%] text-sm p-4 cursor-pointer justify-evenly"
     >
       <div className="w-full relative overflow-hidden rounded-lg">
         {isHover && (

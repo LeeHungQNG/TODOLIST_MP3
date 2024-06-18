@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../store/actions';
 
 const { BsMusicNoteBeamed } = icons;
-const List = ({ songData, isHideAlbum }) => {
+const List = ({ songData, isHideAlbum, isHideNode }) => {
   const dispatch = useDispatch();
 
   return (
@@ -20,7 +20,7 @@ const List = ({ songData, isHideAlbum }) => {
       }}
     >
       <div className="flex items-center gap-3 flex-1">
-        {!isHideAlbum && (
+        {!isHideNode && (
           <span>
             <BsMusicNoteBeamed />
           </span>
