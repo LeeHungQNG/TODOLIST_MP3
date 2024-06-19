@@ -7,7 +7,7 @@ const { BsPersonAdd } = icons;
 const Artist = ({ image, title, follower, link }) => {
   const [isHover, setIsHover] = useState(false);
   return (
-    <div className="w-1/5 flex flex-col gap-[15px]">
+    <div className="w-full flex flex-col gap-[15px]">
       <Link to={link} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className="relative overflow-hidden rounded-full cursor-pointer">
         <img src={image} alt="singer" className={`w-full object-contain rounded-full ${isHover ? 'animate-scale-up-image' : 'animate-scale-down-image'}`} />
         {isHover && <div className="absolute top-0 left-0 right-0 bottom-0 bg-overlay-30 rounded-full"></div>}
