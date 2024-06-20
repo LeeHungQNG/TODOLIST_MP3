@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom'; // dùng để hiển thị component con của public nested route
+import { Outlet, useParams } from 'react-router-dom'; // dùng để hiển thị component con của public nested route
 import { Header, Loading, Player, SidebarLeft, SidebarRight } from '../../components';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 const Public = () => {
   const [isShowRightSidebar, setIsShowRightSidebar] = useState(true);
   const { isLoading } = useSelector((state) => state.app);
+  const { singer } = useParams();
   console.log('🚀 ~ Public ~ isLoading:', isLoading);
   return (
     <div className="w-full relative h-screen flex flex-col bg-main-300">
@@ -20,9 +21,10 @@ const Public = () => {
               <Loading />
             </div>
           )}
-          <div className="h-[70px] fixed top-0 left-[240px] right-[329px] z-50 px-[59px] flex items-center">
+          <div className={`h-[70px] ${singer ? 'bg-transparent' : 'bg-main-300'} fixed top-0 left-[240px] right-[329px] z-50 px-[59px] flex items-center`}>
             <Header />
           </div>
+
           <div className="flex-auto w-full">
             <Scrollbars autoHide style={{ width: '100%', height: '100%' }}>
               <Outlet />

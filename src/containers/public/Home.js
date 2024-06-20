@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NewRelease, Section, Slider, ChartSection } from '../../components';
+import { NewRelease, Section, Sliders, ChartSection } from '../../components';
 import * as apis from '../../apis';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,8 @@ const Home = () => {
 
   return (
     <div className="overflow-y-auto w-full">
-      <Slider />
+      <div className="w-full h-[70px]"></div>
+      <Sliders />
       <Section data={friday} />
       <NewRelease />
       <Section data={chill} />

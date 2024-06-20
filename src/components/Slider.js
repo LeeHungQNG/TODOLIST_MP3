@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getArrSlider } from '../utils/fn';
 import * as actions from '../store/actions';
 import { useNavigate } from 'react-router-dom';
-const Slider = () => {
+const Sliders = () => {
   const { banner } = useSelector((state) => state.app);
   console.log('🚀 ~ Slider ~ banner:', banner);
   const dispatch = useDispatch();
@@ -89,4 +89,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default Sliders;
