@@ -12,7 +12,7 @@ const Section = ({ data }) => {
         <h3 className="text-[20px] font-bold pl-4">{data?.title}</h3>
         <span className="text-xs uppercase p-4">Tất cả</span>
       </div>
-      <div className="flex items-start justify-between">
+      <div className="flex">
         {data &&
           data?.items?.length > 0 &&
           data.items

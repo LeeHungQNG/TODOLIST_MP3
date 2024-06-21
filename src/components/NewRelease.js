@@ -32,7 +32,7 @@ const NewRelease = () => {
           QUỐC TẾ
         </button>
       </div>
-      <div className="flex flex-wrap w-full">
+      <div className="flex flex-wrap w-full justify-between">
         {songs
           ?.filter((item, index) => index < 12)
           ?.map((item) => (
