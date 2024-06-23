@@ -5,6 +5,7 @@ import icons from '../../utils/icons';
 import SongItem from '../../components/SongItem';
 import Section from '../../components/Section';
 import { Artist } from '../../components';
+import { useSelector } from 'react-redux';
 
 const { BsPersonAdd, FaPlay } = icons;
 const Singer = () => {
@@ -12,7 +13,8 @@ const Singer = () => {
   const [artistData, setArtistData] = useState(null);
   const [isHoverPlay, setIsHoverPlay] = useState(false);
   const ref = useRef();
-  console.log('🚀 ~ Singer ~ artistData:', artistData);
+  const { scrollTop } = useSelector((state) => state.app);
+  // console.log('🚀 ~ Singer ~ artistData:', artistData);
   // filter((item) => item?.sectionType === 'song') => filter => trả về mảng => không chấm tới items được
   // find((item) => item?.sectionType === 'song') => find => trả về object => sẽ chấm tới items được
   useEffect(() => {

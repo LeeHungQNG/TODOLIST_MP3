@@ -2,13 +2,28 @@ import React, { useState } from 'react';
 import { Outlet, useParams } from 'react-router-dom'; // dùng để hiển thị component con của public nested route
 import { Header, Loading, Player, SidebarLeft, SidebarRight } from '../../components';
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../store/actions';
 const Public = () => {
   const [isShowRightSidebar, setIsShowRightSidebar] = useState(true);
-  const { isLoading } = useSelector((state) => state.app);
+  const { isLoading, scrollTop } = useSelector((state) => state.app);
   const { singer } = useParams();
-  console.log('🚀 ~ Public ~ isLoading:', isLoading);
+  const dispatch = useDispatch();
+
+  const handleScrollTop = (e) => {
+    if (singer) {
+      if (e.target.scrollTop === 0) {
+        dispatch(actions.zeroScrollTop(true));
+      } else {
+        dispatch(actions.zeroScrollTop(false));
+      }
+    }
+    // if (e.target.scrollTop === 0) {
+    //   dispatch(actions.zeroScrollTop(true));
+    // } else {
+    //   dispatch(actions.zeroScrollTop(false));
+    // }
+  };
   return (
     <div className="w-full relative h-screen flex flex-col bg-main-300">
       <div className="w-full h-full flex flex-auto">
@@ -21,12 +36,12 @@ const Public = () => {
               <Loading />
             </div>
           )}
-          <div className={`h-[70px] ${singer ? 'bg-transparent' : 'bg-main-300'} fixed top-0 left-[240px] right-[329px] z-50 px-[59px] flex items-center`}>
+          <div className="w-full h-[70px]"></div>
+          <div className={`h-[70px] ${scrollTop ? 'bg-transparent' : 'bg-main-300'} fixed top-0 left-[240px] right-[329px] z-50 px-[59px] flex items-center`}>
             <Header />
           </div>
-
           <div className="flex-auto w-full">
-            <Scrollbars autoHide style={{ width: '100%', height: '100%' }}>
+            <Scrollbars onScroll={handleScrollTop} autoHide style={{ width: '100%', height: '100%' }}>
               <Outlet />
             </Scrollbars>
           </div>
