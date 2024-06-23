@@ -43,6 +43,7 @@ const Public = () => {
           <div className="flex-auto w-full">
             <Scrollbars onScroll={handleScrollTop} autoHide style={{ width: '100%', height: '100%' }}>
               <Outlet />
+              <div className="w-full h-[120px]"></div>
             </Scrollbars>
           </div>
         </div>

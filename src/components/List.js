@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../store/actions';
 
 const { BsMusicNoteBeamed } = icons;
-const List = ({ songData, isHideAlbum, isHideNode }) => {
+const List = ({ songData, isHideAlbum, isHideNode, order }) => {
   const dispatch = useDispatch();
 
   return (
@@ -25,7 +25,15 @@ const List = ({ songData, isHideAlbum, isHideNode }) => {
             <BsMusicNoteBeamed />
           </span>
         )}
-
+        {order && (
+          <div
+            className={`${
+              order === 1 ? 'text-shadow-no1' : order === 2 ? 'text-shadow-no2' : order === 3 ? 'text-shadow-no3' : 'text-shadow-rest'
+            } text-[rgba(77,34,104,0.9)] text-main-300 text-[32px] flex items-center justify-center flex-none w-[10%]`}
+          >
+            {order}
+          </div>
+        )}
         <img src={songData?.thumbnail} alt="thumbnail" className="w-10 h-10 object-cover rounded-md" />
         <span className="flex flex-col w-full">
           <span className="text-sm font-semibold">{songData?.title.length > 30 ? `${songData?.title.slice(0, 30)}...` : songData?.title}</span>
@@ -33,7 +41,9 @@ const List = ({ songData, isHideAlbum, isHideNode }) => {
         </span>
       </div>
       {!isHideAlbum && (
-        <div className="flex-1 flex items-center justify-center">{songData?.album?.title.length > 30 ? `${songData?.album?.title.slice(0, 40)}...` : songData?.album?.title}</div>
+        <div className="flex-1 flex items-center justify-center text-xs">
+          {songData?.album?.title.length > 30 ? `${songData?.album?.title.slice(0, 40)}...` : songData?.album?.title}
+        </div>
       )}
       <div className="flex-1 flex justify-end text-xs opacity-70">{moment.utc(songData?.duration * 1000).format('mm:ss')}</div>
     </div>
