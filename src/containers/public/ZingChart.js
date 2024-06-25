@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { apiGetChartHome } from '../../apis';
 import bgChart from '../../assets/bg-chart.jpg';
+import bgChart2 from '../../assets/bg-2.jpg';
 import { Line } from 'react-chartjs-2';
 import { Chart } from 'chart.js/auto';
 import _ from 'lodash';
@@ -107,7 +108,7 @@ const ZingChart = () => {
       setData({ labels, datasets });
     }
   }, [chartData]);
-  console.log(Object.entries(chartData?.weekChart));
+  // console.log(Object.entries(chartData?.weekChart));
   return (
     <div className="">
       <div className="flex flex-col">
@@ -136,18 +137,21 @@ const ZingChart = () => {
         </div>
       </div>
       <div className="px-[60px] mt-12">
-        <RankList data={chartData?.RTChart?.items} />
+        <RankList data={chartData?.RTChart?.items} number={10} />
       </div>
       <div className="relative">
-        <img src={bgChart} alt="bg-chart" className="w-full object-cover grayscale" />
+        <img src={bgChart2} alt="bg-chart" className="w-full h-[650px] object-cover grayscale" />
         <div className="absolute top-0 left-0 bottom-0 right-0 bg-[rgba(206,217,217,0.9)]"></div>
-        <div className="absolute top-0 left-0 bottom-1/2 right-0 px-[60px] mt-8 flex flex-col gap-8">
+        <div className="absolute top-0 left-0 bottom-1/2 right-0 px-[60px] mt-8 flex flex-col gap-4">
           <h3 className="font-bold text-[40px] text-main-500">Bảng xếp hạng tuần</h3>
-          <div className="flex gap-4">
-            {chartData &&
+          <div className="flex gap-4 h-fit">
+            {chartData?.weekChart &&
               Object.entries(chartData?.weekChart)?.map((item, index) => (
-                <div key={index} className="flex-1 rounded-md bg-gray-200 px-[10px] py-5">
+                <div key={index} className="flex-1 rounded-2xl bg-gray-200 px-[10px] py-5">
                   <h3 className="text-[24px] text-main-500 font-bold">{item[0] === 'vn' ? 'Việt Nam' : item[0] === 'us' ? 'US-UK' : item[0] === 'korea' ? 'K-Pop' : ''}</h3>
+                  <div className="mt-4 h-fit">
+                    <RankList data={item[1]?.items} isHideAlbum={true} number={5} flexArtist={true} link={item[1]?.link} />
+                  </div>
                 </div>
               ))}
           </div>

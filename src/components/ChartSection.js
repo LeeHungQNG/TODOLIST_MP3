@@ -54,13 +54,24 @@ const ChartSection = () => {
           }
           const counters = [];
           for (let i = 0; i < 3; i++) {
+            const key = Object.keys(chart?.items || [])[i];
+            if (!key) continue;
             counters.push({
-              data: chart?.items[Object.keys(chart?.items)[i]]?.filter((item) => +item?.hour % 2 === 0)?.map((item) => item.counter),
-              encodeId: Object.keys(chart?.items)[i],
+              // data: chart?.items[Object.keys(chart?.items)[i]]?.filter((item) => +item?.hour % 2 === 0)?.map((item) => item.counter),
+              // encodeId: Object.keys(chart?.items)[i],
+              data: chart?.items[key]?.filter((item) => +item?.hour % 2 === 0)?.map((item) => item.counter),
+              encodeId: key,
             });
           }
           // console.log('🚀 ~ ChartSection ~ counters:', counters);
-          const rs = counters.find((i) => i?.data.some((n) => n === +tooltip.body[0]?.lines[0]?.replace(',', '')));
+
+          const tooltipLine = tooltip?.body?.[0]?.lines?.[0];
+          if (!tooltipLine) return;
+
+          const value = +tooltipLine.replace(',', '');
+          const rs = counters.find((i) => i?.data?.some((n) => n === value));
+          if (!rs) return;
+          // const rs = counters.find((i) => i?.data?.some((n) => n === +tooltip?.body[0]?.lines[0]?.replace(',', '')));
           console.log('🚀 ~ ChartSection ~ rs:', rs);
           setSelected(rs.encodeId);
           const newTooltipData = {

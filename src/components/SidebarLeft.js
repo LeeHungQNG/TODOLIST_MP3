@@ -12,7 +12,8 @@ const SidebarLeft = () => {
   return (
     <div className="flex h-full flex-col bg-main-200">
       <div onClick={() => navigate(path.HOME)} className="w-full h-[70px] px-[25px] py-[15px] flex items-center justify-start cursor-pointer">
-        <img src={logo} alt="logo zingmp3" className="w-[120px] h-[40px]" />
+        <img src={logo} alt="logo zingmp3" className="w-[120px] h-10" />
+        {/* <img src="https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.10.35/static/media/icon_zing_mp3_60.f6b51045.svg" alt="logo" className="w-[95px] h-[45px] min-[1024px]:hidden" /> */}
       </div>
       <div className="flex flex-col">
         {sidebarMenu.map((item) => (

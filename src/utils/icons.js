@@ -5,7 +5,7 @@ import { GoSearch } from 'react-icons/go';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { CiRepeat } from 'react-icons/ci';
-import { MdSkipNext, MdSkipPrevious, MdOutlineFeed, MdOutlineLibraryMusic } from 'react-icons/md';
+import { MdSkipNext, MdSkipPrevious, MdOutlineFeed, MdOutlineLibraryMusic, MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import { TfiControlShuffle } from 'react-icons/tfi';
 import { FaPlay } from 'react-icons/fa';
 import { FaPause } from 'react-icons/fa6';
@@ -15,6 +15,7 @@ import { PiRepeatOnce } from 'react-icons/pi';
 import { HiOutlineVolumeUp, HiOutlineVolumeOff } from 'react-icons/hi';
 import { TbTrashX } from 'react-icons/tb';
 import { IoCloseSharp } from 'react-icons/io5';
+
 const icons = {
   MdOutlineLibraryMusic,
   IoDiscOutline,
@@ -42,6 +43,8 @@ const icons = {
   TbTrashX,
   BsPersonAdd,
   IoCloseSharp,
+  MdArrowBackIos,
+  MdArrowForwardIos,
 };
 
 export default icons;

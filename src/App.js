@@ -6,12 +6,20 @@ import { Album, Home, Login, Personal, Public, SearchSongs, WeekRank, ZingChart,
 import { Route, Routes } from 'react-router-dom';
 import path from './utils/path';
 import * as actions from './store/actions';
+import { apiGetChartHome } from './apis';
 
 function App() {
   const dispatch = useDispatch();
+  const [weekChart, setWeekChart] = useState(null);
 
   useEffect(() => {
     dispatch(actions.getHome());
+    const fetchChartData = async () => {
+      const res = await apiGetChartHome();
+      if (res.data.err === 0) setWeekChart(res.data.data.weekChart);
+    };
+
+    fetchChartData();
   }, [dispatch]);
 
   return (
@@ -24,10 +32,11 @@ function App() {
             {/* <Route path="home" element={<Home></Home>} /> */}
             <Route path={path.HOME} element={<Home></Home>} />
             <Route path={path.LOGIN} element={<Login></Login>} />
-            <Route path={path.MY_MUSIC} element={<Personal></Personal>} />
+            <Route path={path.MY_MUSIC} element={<Home></Home>} />
             <Route path={path.ALBUM__TITLE__PID} element={<Album></Album>} />
+            <Route path={'radio'} element={<Home></Home>} />
             <Route path={path.PLAYLIST__TITLE__PID} element={<Album></Album>} />
-            <Route path={path.WEEKRANK__TITLE__PID} element={<WeekRank></WeekRank>} />
+            <Route path={path.WEEKRANK__TITLE__PID} element={<WeekRank weekChart={weekChart && Object.values(weekChart)}></WeekRank>} />
             <Route path={path.ZING_CHART} element={<ZingChart></ZingChart>} />
             <Route path={path.HOME__SINGER} element={<Singer></Singer>} />
             <Route path={path.HOME_ARTIST__SINGER} element={<Singer></Singer>} />

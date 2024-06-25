@@ -4,7 +4,7 @@ const { MdOutlineLibraryMusic, IoDiscOutline, MdOutlineFeed, TbChartArcs, TbDevi
 export const sidebarMenu = [
   {
     path: 'mymusic',
-    text: 'Cá nhân',
+    text: 'Thư viện',
     icons: <MdOutlineLibraryMusic size={24} />,
   },
   {
@@ -19,8 +19,8 @@ export const sidebarMenu = [
     icons: <TbChartArcs size={24} />,
   },
   {
-    path: 'follow',
-    text: 'Theo dõi',
+    path: 'radio',
+    text: 'Radio',
     icons: <TbDeviceHeartMonitor size={24} />,
   },
 ];

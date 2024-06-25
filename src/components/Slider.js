@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getArrSlider } from '../utils/fn';
 import * as actions from '../store/actions';
 import { useNavigate } from 'react-router-dom';
+import Button from './Button';
+import icons from '../utils/icons';
+
+const { MdArrowBackIos, MdArrowForwardIos } = icons;
+
 const Sliders = () => {
   const { banner } = useSelector((state) => state.app);
   console.log('🚀 ~ Slider ~ banner:', banner);
@@ -73,7 +78,9 @@ const Sliders = () => {
     }
   };
   return (
-    <div className="w-full overflow-hidden px-[59px]">
+    <div className="w-full overflow-hidden px-[59px] relative">
+      {/* <Button text={<MdArrowBackIos size={30} />} style={'absolute top-1/2 left-[70px] z-50 bg-[rgba(255,255,255,0.3)] p-2 text-white rounded-full'}></Button>
+      <Button text={<MdArrowForwardIos size={30} />} style={'absolute top-1/2 right-[70px] z-50 bg-[rgba(255,255,255,0.3)] p-2 text-white rounded-full'}></Button> */}
       <div className="flex gap-8 pt-8">
         {banner?.map((item, index) => (
           <img

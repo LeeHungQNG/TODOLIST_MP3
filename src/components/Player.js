@@ -34,9 +34,11 @@ const Player = ({ setIsShowRightSidebar }) => {
   const [repeatMode, setRepeatMode] = useState(0);
   const [isLoadedSource, setIsLoadedSource] = useState(true);
   const [volume, setVolume] = useState(100);
+  const [isHoverVolume, setIsHoverVolume] = useState(false);
 
   const thumbRef = useRef();
   const trackRef = useRef();
+  const volumeRef = useRef();
 
   useEffect(() => {
     const fetchDetailSong = async () => {
@@ -99,6 +101,12 @@ const Player = ({ setIsShowRightSidebar }) => {
 
   useEffect(() => {
     audio.volume = volume / 100; // audio volume run 0 -> 1
+  }, [volume]);
+
+  useEffect(() => {
+    if (volumeRef.current) {
+      volumeRef.current.style.cssText = `right:${100 - volume}%`;
+    }
   }, [volume]);
 
   const handleTogglePlayMusic = () => {
@@ -195,11 +203,22 @@ const Player = ({ setIsShowRightSidebar }) => {
         </div>
       </div>
       <div className="w-[30%] flex items-center justify-end gap-4 flex-auto">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center" onMouseEnter={() => setIsHoverVolume(true)} onMouseLeave={() => setIsHoverVolume(false)}>
           <span className="cursor-pointer" onClick={() => setVolume((prev) => (+prev === 0 ? 70 : 0))}>
             {+volume >= 50 ? <HiOutlineVolumeUp /> : +volume === 0 ? <HiOutlineVolumeOff /> : <HiOutlineVolumeUp />}
           </span>
-          <input type="range" step={1} min={0} max={100} value={volume} onChange={(e) => setVolume(e.target.value)} />
+          <div className={`w-[130px] h-1 bg-white rounded-l-full rounded-r-full ${isHoverVolume ? 'hidden' : 'relative'}`}>
+            <div ref={volumeRef} className="absolute top-0 left-0 bottom-0 right-0 bg-main-500 rounded-l-full rounded-r-full"></div>
+          </div>
+          <input
+            type="range"
+            step={1}
+            min={0}
+            max={100}
+            value={volume}
+            className={`w-[130px] ${isHoverVolume ? 'inline' : 'hidden'}`}
+            onChange={(e) => setVolume(e.target.value)}
+          />
         </div>
         <span onClick={() => setIsShowRightSidebar((prev) => !prev)} className="p-1 rounded-sm bg-main-500 opacity-90 hover:opacity-100 cursor-pointer">
           <BsMusicNoteList size={20} />

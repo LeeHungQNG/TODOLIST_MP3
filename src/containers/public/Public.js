@@ -11,18 +11,11 @@ const Public = () => {
   const dispatch = useDispatch();
 
   const handleScrollTop = (e) => {
-    if (singer) {
-      if (e.target.scrollTop === 0) {
-        dispatch(actions.zeroScrollTop(true));
-      } else {
-        dispatch(actions.zeroScrollTop(false));
-      }
+    if (e.target.scrollTop === 0) {
+      dispatch(actions.zeroScrollTop(true));
+    } else {
+      dispatch(actions.zeroScrollTop(false));
     }
-    // if (e.target.scrollTop === 0) {
-    //   dispatch(actions.zeroScrollTop(true));
-    // } else {
-    //   dispatch(actions.zeroScrollTop(false));
-    // }
   };
   return (
     <div className="w-full relative h-screen flex flex-col bg-main-300">
@@ -48,7 +41,7 @@ const Public = () => {
           </div>
         </div>
         {isShowRightSidebar && (
-          <div className="w-[330px] hidden 1600:flex h-screen flex-none border border-green-500 animate-slide-left">
+          <div className="w-[330px] hidden 1600:flex h-screen flex-none animate-slide-left">
             <SidebarRight />
           </div>
         )}
