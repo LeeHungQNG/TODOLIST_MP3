@@ -12,6 +12,9 @@ function App() {
   const dispatch = useDispatch();
   const [weekChart, setWeekChart] = useState(null);
 
+  // Lấy width lần đầu
+  const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     dispatch(actions.getHome());
     const fetchChartData = async () => {
@@ -21,6 +24,23 @@ function App() {
 
     fetchChartData();
   }, [dispatch]);
+
+  // Hàm setwidth khi resize
+  const setWidth = (e) => {
+    setCurrentWidth(e.target.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', setWidth);
+    return () => {
+      window.removeEventListener('resize', setWidth);
+    };
+  }, []);
+
+  // truyen width cho cac page
+  useEffect(() => {
+    dispatch(actions.setCurrentWidth(currentWidth));
+  }, [currentWidth]);
 
   return (
     <>

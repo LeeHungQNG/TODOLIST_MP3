@@ -10,7 +10,7 @@ const { MdArrowBackIos, MdArrowForwardIos } = icons;
 
 const Sliders = () => {
   const { banner } = useSelector((state) => state.app);
-  console.log('🚀 ~ Slider ~ banner:', banner);
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -64,7 +64,7 @@ const Sliders = () => {
   }, []);
 
   const handleClickBanner = (item) => {
-    console.log('🚀 ~ handleClickBanner ~ item:', item);
+   
     if (item?.type === 1) {
       dispatch(actions.setCurSongId(item.encodeId));
       dispatch(actions.play(true));

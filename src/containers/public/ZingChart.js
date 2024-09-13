@@ -22,8 +22,6 @@ const ZingChart = () => {
     left: 0,
   });
 
-  console.log('🚀 ~ ZingChart ~ data:', data);
-  console.log('🚀 ~ ZingChart ~ chartData:', chartData);
 
   useEffect(() => {
     const fetchChartData = async () => {
@@ -70,9 +68,9 @@ const ZingChart = () => {
               encodeId: Object.keys(chartData?.RTChart?.chart?.items)[i],
             });
           }
-          // console.log('🚀 ~ ChartSection ~ counters:', counters);
+        
           const rs = counters.find((i) => i?.data.some((n) => n === +tooltip.body[0]?.lines[0]?.replace(',', '')));
-          console.log('🚀 ~ ChartSection ~ rs:', rs);
+       
           setSelected(rs.encodeId);
           const newTooltipData = {
             opacity: 1,
@@ -108,7 +106,7 @@ const ZingChart = () => {
       setData({ labels, datasets });
     }
   }, [chartData]);
-  // console.log(Object.entries(chartData?.weekChart));
+  
   return (
     <div className="">
       <div className="flex flex-col">

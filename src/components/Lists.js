@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const { LuDot } = icons;
 
 const Lists = ({ totalDuration, isHideTime }) => {
-  // console.log({ songs, totalDuration });
+
   const { songs } = useSelector((state) => state.music);
   return (
     <div className="w-full flex flex-col text-xs text-gray-600">

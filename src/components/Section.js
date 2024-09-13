@@ -2,10 +2,10 @@ import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import SectionItem from './SectionItem';
-
 const Section = ({ data }) => {
-  // console.log('🚀 ~ Section ~ data:', data);
   // const navigate = useNavigate();
+  const { currentWidth } = useSelector((state) => state.app);
+
   return (
     <div className="mt-12 px-[44px] flex flex-col gap-1">
       <div className="flex items-center justify-between">
@@ -16,7 +16,7 @@ const Section = ({ data }) => {
         {data &&
           data?.items?.length > 0 &&
           data.items
-            .filter((i, index) => index <= 4)
+            .filter((i, index) => index <= (currentWidth < 600 ? 2 : currentWidth < 800 ? 3 : 4))
             .map((item, idx) => (
               <SectionItem
                 key={idx}

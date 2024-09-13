@@ -5,7 +5,7 @@ import { Lists } from '../../components';
 const SearchSongs = () => {
   const { searchData } = useSelector((state) => state.music);
   const dispatch = useDispatch();
-  console.log('🚀 ~ SearchSongs ~ searchData:', searchData);
+ 
   useEffect(() => {
     dispatch(actions.getSearchSongs(searchData?.top?.id));
   }, [searchData]);

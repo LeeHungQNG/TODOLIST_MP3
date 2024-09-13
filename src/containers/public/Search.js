@@ -15,7 +15,7 @@ const Search = () => {
   // }, [searchParams]);
 
   const { keyword } = useSelector((state) => state.music);
-  console.log('🚀 ~ Search ~ keyword:', keyword);
+ 
   return (
     <div className="w-full">
       <div className="flex h-[50px] mb-7 items-center text-sm border-b border-gray-400 pl-[60px] pb-1">

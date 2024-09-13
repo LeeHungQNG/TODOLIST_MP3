@@ -13,10 +13,10 @@ const { FaPlay } = icons;
 const Album = () => {
   const [playlistData, setPlaylistData] = useState({});
   const { pid } = useParams();
-  console.log({ pid });
+ 
 
   const location = useLocation();
-  console.log('🚀 ~ Album ~ location:', location);
+  
 
   const { curSongId, isPlaying, songs } = useSelector((state) => state.music);
 
@@ -27,7 +27,7 @@ const Album = () => {
     const fetchDetailPlaylist = async () => {
       dispatch(actions.loading(true));
       const response = await apis.apiGetDetailPlaylist(pid);
-      // console.log('🚀 ~ fetchDetailPlaylist ~ response:', response);
+     
       dispatch(actions.loading(false));
       if (response?.data?.err === 0) {
         setPlaylistData(response?.data?.data);
@@ -38,7 +38,7 @@ const Album = () => {
   }, [pid]);
 
   useEffect(() => {
-    console.log(location?.state?.playAlbum);
+  
     if (location?.state?.playAlbum) {
       const randomSong = Math.round(Math.random() * playlistData?.song?.items?.length) - 1;
       dispatch(actions.setCurSongId(playlistData?.song?.items[randomSong].encodeId));

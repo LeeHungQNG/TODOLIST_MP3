@@ -65,7 +65,6 @@ const Player = ({ setIsShowRightSidebar }) => {
     };
     fetchDetailSong();
   }, [curSongId]);
-  // console.log('🚀 ~ Player ~ songInfo:', songInfo);
 
   useEffect(() => {
     intervalId && clearInterval(intervalId);
@@ -74,11 +73,19 @@ const Player = ({ setIsShowRightSidebar }) => {
     if (isPlaying && thumbRef.current) {
       audio.play();
       intervalId = setInterval(() => {
-        let percent = Math.round((audio.currentTime * 10000) / songInfo.duration) / 100; // làm tròn số thập phân nhân cho 10000
-        thumbRef.current.style.cssText = `right: ${100 - percent}%`;
-        setCurSeconds(Math.round(audio.currentTime));
+        let percent = Math.round((audio?.currentTime * 10000) / songInfo?.duration) / 100; // làm tròn số thập phân nhân cho 10000
+        if (thumbRef.current) {
+          thumbRef.current.style.cssText = `right: ${100 - percent}%`;
+        }
+        setCurSeconds(Math.round(audio?.currentTime));
       }, 200);
     }
+    // Clean up the interval when the component is unmounted or dependencies change
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
   }, [audio]);
 
   useEffect(() => {
@@ -114,7 +121,9 @@ const Player = ({ setIsShowRightSidebar }) => {
       audio.pause();
       dispatch(actions.play(false));
     } else {
-      audio.play();
+      setTimeout(() => {
+        audio.play();
+      }, 1000);
       dispatch(actions.play(true));
     }
   };
@@ -184,7 +193,7 @@ const Player = ({ setIsShowRightSidebar }) => {
           <span className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} onClick={handlePrevSong}>
             <MdSkipPrevious size={28} />
           </span>
-          <span onClick={handleTogglePlayMusic} className="p-2 flex items-center border border-gray-700 rounded-full cursor-pointer hover:text-main-500">
+          <span onClick={() => handleTogglePlayMusic()} className="p-2 flex items-center border border-gray-700 rounded-full cursor-pointer hover:text-main-500">
             {!isLoadedSource ? <LoadingSong /> : isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
           </span>
           <span className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} onClick={handleNextSong}>

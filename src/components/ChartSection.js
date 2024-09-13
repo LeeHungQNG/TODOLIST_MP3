@@ -44,7 +44,6 @@ const ChartSection = () => {
       tooltip: {
         enabled: false,
         external: ({ tooltip }) => {
-          // console.log('🚀 ~ ChartSection ~ tooltip:', tooltip);
           if (!chartRef || !chartRef.current) return;
           if (tooltip.opacity === 0) {
             if (tooltipState.opacity !== 0) {
@@ -63,7 +62,6 @@ const ChartSection = () => {
               encodeId: key,
             });
           }
-          // console.log('🚀 ~ ChartSection ~ counters:', counters);
 
           const tooltipLine = tooltip?.body?.[0]?.lines?.[0];
           if (!tooltipLine) return;
@@ -72,7 +70,7 @@ const ChartSection = () => {
           const rs = counters.find((i) => i?.data?.some((n) => n === value));
           if (!rs) return;
           // const rs = counters.find((i) => i?.data?.some((n) => n === +tooltip?.body[0]?.lines[0]?.replace(',', '')));
-          console.log('🚀 ~ ChartSection ~ rs:', rs);
+
           setSelected(rs.encodeId);
           const newTooltipData = {
             opacity: 1,
@@ -107,13 +105,11 @@ const ChartSection = () => {
       }
       setData({ labels, datasets });
     }
-    // console.log('🚀 ~ useEffect ~ datasets:', datasets);
-    // console.log('🚀 ~ useEffect ~ labels:', labels);
   }, [chart]);
 
   return (
-    <div className="px-[59px] mt-12 relative max-h-[430px] rounded-md">
-      <img src={bgchart} alt="chart-bg" className="w-full object-cover rounded-md max-h-[430px]" />
+    <div className="px-[59px] mt-12 relative min-[1324px]:max-h-[430px] h-[760px] rounded-md ">
+      <img src={bgchart} alt="chart-bg" className="w-full object-cover rounded-md min-[1324px]:max-h-[430px] h-[760px]" />
       <div className="absolute top-0 z-10 left-[59px] bottom-0 right-[59px] bg-[rgba(77,34,104,0.9)] rounded-md"></div>
       <div className="absolute top-0 z-20 left-[59px] bottom-0 right-[59px] p-5 flex flex-col gap-5 rounded-md">
         <Link to={path.ZING_CHART} className="flex gap-4 items-center">
@@ -122,7 +118,7 @@ const ChartSection = () => {
             <FaPlay size={16} />
           </span>
         </Link>
-        <div className="flex gap-4 h-full">
+        <div className="min-[1324px]:flex-row flex flex-col gap-4 h-full">
           <div className="flex-3 flex flex-col gap-4">
             {rank
               ?.filter((i, index) => index < 3)
@@ -142,7 +138,7 @@ const ChartSection = () => {
               Xem thêm
             </Link>
           </div>
-          <div className="flex-7 h-[90%] relative">
+          <div className="flex-7 order-first min-[1324px]:order-last min-[1324px]:w-[500px] h-[80%] relative">
             {data && <Line ref={chartRef} data={data} options={options} />}
             <div className="tooltip" style={{ top: tooltipState.top, left: tooltipState.left, opacity: tooltipState.opacity, position: 'absolute' }}>
               <SongItem

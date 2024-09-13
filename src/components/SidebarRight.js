@@ -10,12 +10,10 @@ const SidebarRight = () => {
   const [isRecent, setIsRecent] = useState(false);
   const [playlist, setPlaylist] = useState(null);
   const { curSongData, curAlbumId, isPlaying, recentSongs, curSongId } = useSelector((state) => state.music);
-  // console.log('🚀 ~ SidebarRight ~ recentSongs:', recentSongs);
-  // console.log('🚀 ~ SidebarRight ~ curSongData:', curSongData);
 
   const fetchDetailPlaylist = async () => {
     const res = await apiGetDetailPlaylist(curAlbumId);
-    // console.log('🚀 ~ fetchDetailPlaylist ~ res:', res);
+
     if (res.data?.err === 0) setPlaylist(res?.data?.data?.song?.items);
   };
 
@@ -67,14 +65,17 @@ const SidebarRight = () => {
       ) : (
         <div className="w-full flex-col flex-auto flex px-2">
           <Scrollbars autoHide style={{ width: '100%', height: '100%' }}>
-            <SongItem
-              thumbnail={curSongData?.thumbnail}
-              artistsNames={curSongData?.artistsNames}
-              title={curSongData?.title}
-              sid={curSongData?.encodeId}
-              size="w-[40px] h-[40px]"
-              style="bg-main-500 text-white"
-            />
+            {curSongId && (
+              <SongItem
+                thumbnail={curSongData?.thumbnail}
+                artistsNames={curSongData?.artistsNames}
+                title={curSongData?.title}
+                sid={curSongData?.encodeId}
+                size="w-[40px] h-[40px]"
+                style="bg-main-500 text-white"
+              />
+            )}
+
             <div className="flex flex-col text-black pt-[15px] px-2 pb-[5px]">
               <span className="text-sm font-bold">Tiếp theo</span>
               <span className="opacity-70 text-xs flex gap-1">

@@ -14,13 +14,13 @@ const Singer = () => {
   const [isHoverPlay, setIsHoverPlay] = useState(false);
   const ref = useRef();
   const { scrollTop } = useSelector((state) => state.app);
-  // console.log('🚀 ~ Singer ~ artistData:', artistData);
+ 
   // filter((item) => item?.sectionType === 'song') => filter => trả về mảng => không chấm tới items được
   // find((item) => item?.sectionType === 'song') => find => trả về object => sẽ chấm tới items được
   useEffect(() => {
     const fetchArtistData = async () => {
       const res = await apiGetArtist(singer);
-      console.log('🚀 ~ fetchArtistData ~ res:', res);
+    
       if (res.data.err === 0) {
         setArtistData(res.data.data);
       }

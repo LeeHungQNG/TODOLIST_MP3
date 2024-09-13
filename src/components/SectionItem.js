@@ -1,10 +1,13 @@
 import React, { memo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import icons from '../utils/icons';
+import { useDispatch } from 'react-redux';
+import * as actions from '../store/actions';
 
 const { FaRegHeart, HiOutlineDotsHorizontal, FaPlay } = icons;
 const SectionItem = ({ link, thumbnailM, title, data, artistsNames, sortDescription }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isHover, setIsHover] = useState(false);
   const imageRef = useRef();
   const handleHover = () => {
@@ -25,7 +28,7 @@ const SectionItem = ({ link, thumbnailM, title, data, artistsNames, sortDescript
       }}
       onMouseEnter={handleHover}
       onMouseLeave={handleLeave}
-      className="flex flex-col gap-3 w-[20%] text-sm p-4 cursor-pointer justify-evenly"
+      className="flex flex-col gap-3 flex-1 text-sm p-4 cursor-pointer justify-evenly"
     >
       <div className="w-full relative overflow-hidden rounded-lg">
         {isHover && (
@@ -36,7 +39,8 @@ const SectionItem = ({ link, thumbnailM, title, data, artistsNames, sortDescript
             <span
               onClick={(e) => {
                 e.stopPropagation(); //  Vì khi click vào icon sẽ bị nổi bọt lấy event onclick thẻ cha nên phải có hàm này chống nổi bọt ở thẻ con
-                navigate(link?.split('.')[0], { state: { playAlbum: true } });
+                // navigate(link?.split('.')[0], { state: { playAlbum: true } });
+                navigate(link?.split('.')[0]);
               }}
               className="p-3 border border-white rounded-full"
             >

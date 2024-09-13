@@ -13,6 +13,7 @@ const initState = {
   chart: null,
   rank: null,
   scrollTop: true,
+  currentWidth: null,
 };
 
 const appReducer = (state = initState, action) => {
@@ -21,10 +22,10 @@ const appReducer = (state = initState, action) => {
       return {
         ...state,
         banner: action.homeData?.find((item) => item.sectionId === 'hSlider')?.items || null,
-        friday: action.homeData?.find((item) => item.sectionId === 'hSeasonTheme') || null,
+        friday: action.homeData?.find((item) => item.sectionId === 'hNewrelease') || null,
         chill: action.homeData?.find((item) => item.sectionId === 'hEditorTheme') || null,
         top100: action.homeData?.find((item) => item.sectionId === 'h100') || null,
-        remix: action.homeData?.find((item) => item.sectionId === 'hEditorTheme3') || null,
+        remix: action.homeData?.find((item) => item.sectionId === 'hEditorTheme1') || null,
         albumHot: action.homeData?.find((item) => item.sectionId === 'hAlbum') || null,
         newRelease: action.homeData?.find((item) => item.sectionType === 'new-release') || null,
         weekChart: action.homeData?.find((item) => item.sectionType === 'weekChart')?.items || null,
@@ -40,6 +41,11 @@ const appReducer = (state = initState, action) => {
       return {
         ...state,
         scrollTop: action.flag,
+      };
+    case actionTypes.CURRENT_WIDTH:
+      return {
+        ...state,
+        currentWidth: action.w,
       };
 
     default:

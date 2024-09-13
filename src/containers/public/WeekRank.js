@@ -8,9 +8,9 @@ const notActivedStyle = 'text-[24px] py-[12px] text-black font-bold uppercase';
 const activedStyle = 'text-[24px] py-[12px] text-main-500 font-bold uppercase border-b-2 border-[#0E8080]';
 
 const WeekRank = ({ weekChart }) => {
-  console.log('🚀 ~ WeekRank ~ weekChart:', weekChart);
+
   const { pid } = useParams();
-  console.log('🚀 ~ WeekRank ~ pid:', pid);
+ 
 
   useEffect(() => {}, []);
 

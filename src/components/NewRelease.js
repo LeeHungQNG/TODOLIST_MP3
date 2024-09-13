@@ -14,7 +14,7 @@ const NewRelease = () => {
     <div className="mt-12 px-[59px] flex flex-col gap-5">
       <div className="flex items-center justify-between">
         <h3 className="text-[20px] font-bold">{newRelease?.title}</h3>
-        <span className="text-xs uppercase">Tất cả</span>
+        {/* <span className="text-xs uppercase">Tất cả</span> */}
       </div>
       <div className="flex items-center gap-5 text-xs">
         <button
