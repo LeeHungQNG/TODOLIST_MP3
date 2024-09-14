@@ -54,7 +54,7 @@ function App() {
             <Route path={path.LOGIN} element={<Login></Login>} />
             <Route path={path.MY_MUSIC} element={<Home></Home>} />
             <Route path={path.ALBUM__TITLE__PID} element={<Album></Album>} />
-            <Route path={'radio'} element={<Home></Home>} />
+            {/* <Route path={'radio'} element={<Home></Home>} /> */}
             <Route path={path.PLAYLIST__TITLE__PID} element={<Album></Album>} />
             <Route path={path.WEEKRANK__TITLE__PID} element={<WeekRank weekChart={weekChart && Object.values(weekChart)}></WeekRank>} />
             <Route path={path.ZING_CHART} element={<ZingChart></ZingChart>} />

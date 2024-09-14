@@ -19,8 +19,8 @@ export const sidebarMenu = [
     icons: <TbChartArcs size={24} />,
   },
   {
-    path: 'radio',
-    text: 'Radio',
+    path: 'Son-Tung-M-TP',
+    text: 'Theo dõi',
     icons: <TbDeviceHeartMonitor size={24} />,
   },
 ];
