@@ -21,10 +21,18 @@ const SectionItem = ({ link, thumbnailM, title, data, artistsNames, sortDescript
     imageRef.current.classList?.add('animate-scale-down-image');
     imageRef.current.classList?.remove('animate-scale-up-image');
   };
+
+  const handleClickSong = () => {
+    if (data.sectionId === 'hNewrelease') {
+      return;
+    }
+    navigate(link?.split('.')[0], { state: { playAlbum: false } });
+  };
+
   return (
     <div
       onClick={() => {
-        navigate(link?.split('.')[0], { state: { playAlbum: false } });
+        handleClickSong();
       }}
       onMouseEnter={handleHover}
       onMouseLeave={handleLeave}

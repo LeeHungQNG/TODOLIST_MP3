@@ -45,7 +45,6 @@ const Player = ({ setIsShowRightSidebar }) => {
       setIsLoadedSource(false);
       // const response = await apis.apiGetDetailSong(curSongId);
       const [res1, res2] = await Promise.all([apis.apiGetDetailSong(curSongId), apis.apiGetSong(curSongId)]);
-
       setIsLoadedSource(true);
       if (res1?.data?.err === 0) {
         setSongInfo(res1?.data?.data);
@@ -55,12 +54,16 @@ const Player = ({ setIsShowRightSidebar }) => {
         audio.pause();
         setAudio(new Audio(res2?.data?.data['128']));
       } else {
-        audio.pause();
-        setAudio(new Audio());
-        dispatch(actions.play(false));
-        toast.warn(res2?.data.msg);
-        setCurSeconds(0);
-        thumbRef.current.style.cssText = `right: 100%`;
+        try {
+          audio.pause();
+          setAudio(new Audio());
+          dispatch(actions.play(false));
+          toast.warn(res2?.data.msg);
+          setCurSeconds(0);
+          thumbRef.current.style.cssText = `right: 100%`;
+        } catch (error) {
+          toast.error(error);
+        }
       }
     };
     fetchDetailSong();
@@ -117,13 +120,11 @@ const Player = ({ setIsShowRightSidebar }) => {
   }, [volume]);
 
   const handleTogglePlayMusic = () => {
-    if (isPlaying) {
+    if (isPlaying && !audio.paused) {
       audio.pause();
       dispatch(actions.play(false));
-    } else {
-      setTimeout(() => {
-        audio.play();
-      }, 1000);
+    } else if (audio.paused && !isPlaying) {
+      audio.play();
       dispatch(actions.play(true));
     }
   };
@@ -159,7 +160,11 @@ const Player = ({ setIsShowRightSidebar }) => {
   };
 
   const handleRepeatOne = () => {
-    audio.play();
+    try {
+      audio.play();
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const handleShuffle = () => {
@@ -171,7 +176,7 @@ const Player = ({ setIsShowRightSidebar }) => {
   return (
     <div className="bg-main-400 px-5 h-full flex">
       <div className="w-[30%] flex-auto flex gap-4 items-center">
-        <img src={songInfo?.thumbnail} alt="thumbnail" className="w-16 h-16 object-cover rounded-md" />
+        {songInfo?.thumbnail && <img src={songInfo?.thumbnail} alt="thumbnail" className="w-16 h-16 object-cover rounded-md" />}
         <div className="flex flex-col">
           <span className="font-semibold text-gray-700 text-sm">{songInfo?.title}</span>
           <span className="text-xs text-gray-500">{songInfo?.artistsNames}</span>
@@ -208,7 +213,7 @@ const Player = ({ setIsShowRightSidebar }) => {
           <div ref={trackRef} className="w-3/5 h-[3px] hover:h-[8px] cursor-pointer rounded-l-full rounded-r-full relative bg-[rgba(0,0,0,0.1)]" onClick={handleClickProgressBar}>
             <div ref={thumbRef} className="absolute top-0 left-0 bottom-0 rounded-l-full rounded-r-full bg-[#0e8080]"></div>
           </div>
-          <span>{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
+          <span>{songInfo?.duration && moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
         </div>
       </div>
       <div className="w-[30%] flex items-center justify-end gap-4 flex-auto">
